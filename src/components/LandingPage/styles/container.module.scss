@@ -1,0 +1,10 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.landingContainer {
+  max-width: 78rem;
+  margin: 0 auto;
+  margin-top: 8rem;
+  margin-bottom: 2rem;
+  @include flexBox(column);
+  @include flexProperty(space-between, center);
+}

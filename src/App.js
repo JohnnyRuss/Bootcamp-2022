@@ -1,5 +1,14 @@
+import { Routes, Route } from 'react-router-dom';
+import { Landing } from './Pages';
+
 function App() {
-  return <h1>Starter Environment</h1>;
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<Landing />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
