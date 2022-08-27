@@ -1,0 +1,12 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.landingActions {
+  @include flexBox(column);
+  @include flexProperty(space-between, center);
+  gap: 2.6rem;
+
+  .actionsBtn {
+    padding: 1.8rem 0;
+    width: 38.7rem;
+  }
+}
