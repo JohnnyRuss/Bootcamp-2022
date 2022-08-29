@@ -1,0 +1,72 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.uploadMediaBox {
+  position: relative;
+  grid-row: 1;
+  grid-column: 1/-1;
+  height: 100%;
+  border-radius: $radius-big;
+  overflow: hidden;
+  border: 0.2rem dashed color('blue-shade-color');
+  @include flexBox(column);
+  @include flexProperty(space-evenly, center);
+  font-weight: weight('boldWeight');
+  font-size: size('largeSize');
+  background: color('grey-dark-light-4');
+
+  &.active {
+    border: 0.3rem solid color('blue-shade-color');
+  }
+
+  &.invalid {
+    border-color: color('red-color');
+    background: rgba(color('red-color'), 0.1);
+
+    .uploadMediaCaption {
+      color: color('red-color');
+    }
+
+    .uploadMediaCaption::before {
+      content: url('../../../../public/assets/error-icon.svg');
+      position: absolute;
+      z-index: 99;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  & .uploadMediaCaption {
+    position: relative;
+    color: color('blue-shade-color');
+    max-width: 19.5rem;
+    text-align: center;
+  }
+
+  .uploadBtn {
+    padding: 1.8rem 6rem;
+    background: color('blue-primary-color');
+    border-radius: $radius-small;
+    color: color('white-color');
+    cursor: pointer;
+  }
+
+  .flInp {
+    display: none;
+  }
+
+  .userMedia {
+    @include fitImage;
+  }
+
+  .discardMediaBtn {
+    position: absolute;
+    z-index: 9;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 1rem;
+    right: 1rem;
+    background: color('blue-border-light');
+    border-radius: 50%;
+  }
+}

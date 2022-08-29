@@ -1,0 +1,38 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.checkBoxField {
+  transform: translateX(2.5rem);
+
+  & .checkBox {
+    display: none;
+  }
+
+  & label {
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 100%;
+      border: 2px solid color(blue-border-light);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -2.2rem;
+      top: 0.13rem;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 100%;
+    }
+  }
+
+  .checkBox:checked ~ label::after {
+    background: color(blue-border-light);
+  }
+}

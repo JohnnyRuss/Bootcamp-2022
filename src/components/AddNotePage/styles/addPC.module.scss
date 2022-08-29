@@ -1,0 +1,54 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.addPcForm {
+  margin-top: 2.7rem;
+  padding: 9.6rem 17.4rem 4.4rem;
+  display: grid;
+  grid-template: 42.3rem repeat(8, min-content) / repeat(6, 1fr);
+  align-items: center;
+  //   column-gap: 1.8rem;
+  row-gap: 4.2rem;
+  background: color('white-color');
+  border-radius: $radius-big;
+  @include boxShadowBlack(0, 0.5rem, 0.1);
+
+  .col-6 {
+    grid-column: 1/-1;
+  }
+
+  .datePicker {
+    grid-column: span 3;
+    height: 5rem;
+    padding: 0 1rem;
+    border-radius: $radius-small;
+    border: 0.18rem solid color(blue-border-light);
+    color: color('placeholder-color');
+    margin-top: 0.4rem;
+
+    &:active,
+    &:focus {
+      outline: 0.18rem solid color('active-input-border');
+      background: color('active-input-color');
+      color: color('black-color');
+    }
+  }
+
+  .btn {
+    grid-row: -1;
+    padding: 1.8rem 4.5rem;
+    font-size: size('largeSize');
+    font-weight: weight('bold-weight');
+    grid-column: span 3;
+
+    &.btnNext {
+      justify-self: end;
+    }
+
+    &.btnBack {
+      justify-self: start;
+      color: color('blue-primary-color');
+      padding: 0;
+      background: none;
+    }
+  }
+}

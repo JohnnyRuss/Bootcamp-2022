@@ -1,0 +1,23 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.addCollaboratorForm {
+  margin-top: 2.7rem;
+  padding: 9.6rem 17.4rem 4.4rem;
+  display: grid;
+  grid-template: repeat(6, min-content) / repeat(2, 1fr);
+  column-gap: 6rem;
+  row-gap: 4.2rem;
+  background: color('white-color');
+  border-radius: $radius-big;
+  @include boxShadowBlack(0, 0.5rem, 0.1);
+ 
+
+
+  .btnNext {
+    padding: 1.8rem 4.5rem;
+    font-size: size('largeSize');
+    font-weight: weight('bold-weight');
+    grid-column: 2;
+    justify-self: end;
+  }
+}
