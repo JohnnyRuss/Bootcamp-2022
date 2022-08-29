@@ -1,0 +1,22 @@
+@use '../../styles/helpers/helpers' as *;
+
+.notesContainer {
+  margin-bottom: 3rem;
+
+  .pageTitle {
+    font-size: size('headingSize');
+    text-align: center;
+    font-weight: weight('extra-bold-weight');
+    margin: 7.9rem 0 9.7rem 0;
+  }
+
+  .notesList {
+    max-width: 116rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5.2rem;
+    grid-auto-rows: 20rem;
+    font-size: size('bigSize');
+  }
+}

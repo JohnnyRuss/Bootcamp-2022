@@ -1,5 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import { Landing, AddCollaboratorInfo, AddPcInfo, AddNote, Success } from './Pages';
+import {
+  Landing,
+  AddCollaboratorInfo,
+  AddPcInfo,
+  AddNote,
+  Success,
+  ProductsList,
+  Product,
+} from './Pages';
 
 function App() {
   return (
@@ -11,6 +19,8 @@ function App() {
           <Route path='pc-info' element={<AddPcInfo />} />
           <Route path='success' element={<Success />} />
         </Route>
+        <Route path='/note-list' element={<ProductsList />} />
+        <Route path='/note-list/:id' element={<Product />} />
       </Routes>
     </>
   );
