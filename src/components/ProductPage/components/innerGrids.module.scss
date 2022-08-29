@@ -1,0 +1,16 @@
+@use '../../../styles//helpers/helpers' as *;
+
+.inner-grid {
+  display: grid;
+  grid-template-columns: 22.5rem max-content;
+  column-gap: 3.5rem;
+
+  .inner-grid__keys {
+    font-weight: weight('boldWeight');
+    color: color('dark-grey-color');
+  }
+
+  .inner-grid__values {
+    color: color('dark-grey-color-3');
+  }
+}
