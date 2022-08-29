@@ -1,0 +1,18 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.addNoteContainerWrapper {
+  padding: 5.3rem 0 4.5rem 0;
+  background: color('grey-dark-light-4');
+  position: relative;
+
+  .addNoteContainer {
+    max-width: 122.6rem;
+    margin: 0 auto;
+  }
+
+  .logoRound {
+    margin-top: 6.7rem;
+    @include flexBox;
+    @include flexProperty(center, center);
+  }
+}
