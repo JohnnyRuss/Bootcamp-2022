@@ -1,0 +1,15 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.goBackBtn {
+  width: 5.3rem;
+  height: 5.3rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  @include flexBox;
+  @include flexProperty(center, center);
+  background: color('grey-dark-light-2');
+  cursor: pointer;
+  position: fixed;
+  left: 7rem;
+  top: 5.3rem;
+}

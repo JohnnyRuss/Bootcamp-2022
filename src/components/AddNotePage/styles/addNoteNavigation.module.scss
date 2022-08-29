@@ -1,0 +1,31 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.addNoteNav {
+  margin-bottom: 1rem;
+
+  &List {
+    @include flexBox;
+    @include flexProperty(center, center);
+    gap: 6.6rem;
+    font-size: size('largeSize');
+    color: color('black-secondary');
+  }
+
+  &ListItem {
+    position: relative;
+
+    &Active::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 10%;
+      width: 80%;
+      height: 0.2rem;
+      background: color('black-secondary');
+    }
+
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+}
