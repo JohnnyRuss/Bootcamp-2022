@@ -1,0 +1,36 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.popUp {
+  background: color('dark-grey-color-2');
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &Window {
+    @include CenterAbsPos;
+    width: 60vw;
+    height: 75vh;
+    @include flexBox(column);
+    @include flexProperty(center, center);
+    gap: 2rem;
+    background: color('white-color');
+    border-radius: $radius-small;
+    animation: scaleUp 0.5s forwards;
+  }
+
+  &WindowFig {
+    @include flexBox;
+    @include flexProperty(center, center);
+  }
+
+  .btn {
+    padding: 1.8rem 3rem;
+  }
+
+  .btn.mainBtn {
+    background: none;
+    color: color('blue-primary-color');
+  }
+}

@@ -18,3 +18,7 @@ export function getLocaleStorage(key) {
 export function setDataToLocale(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+export function removeFromLocale(key) {
+  localStorage.removeItem(key);
+}
