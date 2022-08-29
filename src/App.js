@@ -6,7 +6,7 @@ import {
   AddNote,
   Success,
   ProductsList,
-  Product,
+  ProductPage,
 } from './Pages';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Route path='success' element={<Success />} />
         </Route>
         <Route path='/note-list' element={<ProductsList />} />
-        <Route path='/note-list/:id' element={<Product />} />
+        <Route path='/note-list/:id' element={<ProductPage />} />
       </Routes>
     </>
   );

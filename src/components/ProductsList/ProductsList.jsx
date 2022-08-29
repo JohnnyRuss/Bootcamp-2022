@@ -1,7 +1,7 @@
 import { uid } from 'uid';
 
 import styles from './productsList.module.scss';
-import { GoBackBTN } from '../Layouts';
+import { GoBackBTN, PageTitle } from '../Layouts';
 import Card from './components/Card';
 
 const prList = [
@@ -84,7 +84,7 @@ function ProductsList() {
     <>
       <GoBackBTN path='/' />
       <div className={styles.notesContainer}>
-        <p className={styles.pageTitle}>ჩანაწერების სია</p>
+        <PageTitle title='ჩანაწერების სია' />
         <div className={styles.notesList}>
           {prList.map((pr) => (
             <Card key={uid(6)} pr={pr} />
