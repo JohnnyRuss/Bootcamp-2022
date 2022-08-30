@@ -5,12 +5,12 @@ function Card({ pr }) {
   return (
     <div className={styles.noteItem}>
       <figure className={styles.noteFig}>
-        <img src={pr.img} alt='product' />
+        <img src={`https://pcfy.redberryinternship.ge/${pr.laptop.image}`} alt='product' />
       </figure>
       <div className={styles.noteDetails}>
-        <p className={styles.author}>{pr.author}</p>
-        <p>{pr.pc}</p>
-        <Link to={pr.id}>
+        <p className={styles.author}>{`${pr.user.name} ${pr.user.surname}`}</p>
+        <p>{pr.laptop.name}</p>
+        <Link to={`${pr.laptop.id}`} state={{ key: pr.laptop.id }}>
           <button className={styles.moreBtn}>მეტის ნახვა</button>
         </Link>
       </div>

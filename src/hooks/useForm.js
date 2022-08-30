@@ -1,30 +1,57 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { useAxios } from './';
 import { FormContext } from '../store/FormProvider';
 import generateDBKeyPairs from '../utils/generateDBKeyPairs';
-import { removeFromLocale } from '../utils/getLocalData';
 
 function useForm() {
-  const { collaboratorData, pcData, validCollaborator, validPCInfo, file } =
-    useContext(FormContext);
-  const valid = validCollaborator && validPCInfo;
+  const {
+    collaboratorData,
+    pcData,
+    validCollaborator,
+    validPCInfo,
+    file,
+    dispatchForm,
+    setSumbited,
+  } = useContext(FormContext);
+
+  const { sendQuery, loading, error } = useAxios();
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  const valid = validCollaborator && validPCInfo;
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const TOKEN = process.env.REACT_APP_JWT_TOKEN;
-    const finalOutPut = { ...collaboratorData, ...pcData, laptopImage: file.file, token: TOKEN };
-    const data = {};
-    Object.keys(finalOutPut).map((key) => (data[generateDBKeyPairs(key)] = finalOutPut[key]));
-    if (valid) {
-      ['reservedInfo', 'validUpdate'].forEach((key) => removeFromLocale(key));
+
+    if (!valid) return;
+
+    try {
+      const TOKEN = process.env.REACT_APP_JWT_TOKEN;
+
+      const finalOutPut = {
+        ...collaboratorData,
+        ...pcData,
+        laptopImage: file.file,
+        token: TOKEN,
+      };
+
+      const data = {};
+      Object.keys(finalOutPut).map((key) => (data[generateDBKeyPairs(key)] = finalOutPut[key]));
+
+      await sendQuery(data);
+
+      setSumbited(true);
+      dispatchForm({ type: 'RESET_FORM' });
+
       navigate('/add-note/success');
+    } catch (error) {
+      // console.log(error.message);
     }
-    console.log({ valid, data });
   }
 
-  return { handleSubmit };
+  return { handleSubmit, loading, error };
 }
 
 export default useForm;

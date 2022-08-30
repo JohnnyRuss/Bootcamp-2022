@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import styles from './styles/successPopUp.module.scss';
 import { PrimaryButton } from '../Layouts';
-import { Link } from 'react-router-dom';
 
 function SuccessPopUp() {
   return (

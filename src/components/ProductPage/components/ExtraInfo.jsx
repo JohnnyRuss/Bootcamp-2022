@@ -1,17 +1,17 @@
 import styles from './innerGrids.module.scss';
 
-function ExtraInfo({ prod }) {
+function ExtraInfo({ data }) {
   return (
     <>
       <div className={styles['inner-grid']}>
         <p className={styles['inner-grid__keys']}>ლეპტოპის მდგომარეობა:</p>
-        <p className={styles['inner-grid__values']}>{prod.laptopState}</p>
+        <p className={styles['inner-grid__values']}>{data.laptop.state}</p>
         <p className={styles['inner-grid__keys']}>ლეპტოპის ფასი:</p>
-        <p className={styles['inner-grid__values']}>{prod.laptopPrice}</p>
+        <p className={styles['inner-grid__values']}>{data.laptop.price}</p>
       </div>
       <div className={styles['inner-grid']}>
         <p className={styles['inner-grid__keys']}>შევსების რიცხვი:</p>
-        <p className={styles['inner-grid__values']}>12/12/12</p>
+        <p className={styles['inner-grid__values']}>{data.laptop?.purchase_date}</p>
       </div>
     </>
   );
