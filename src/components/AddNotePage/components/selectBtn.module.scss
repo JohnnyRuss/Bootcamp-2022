@@ -1,0 +1,22 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.selectBtn {
+  @include flexBox;
+  @include flexProperty(space-between, center);
+  background: color('grey-dark-light-3');
+  border-radius: $radius-small;
+  padding: 0 1.6rem;
+  height: 5rem;
+
+  &.active figure {
+    transform: rotate(180deg);
+  }
+
+  &.invalid {
+    border: 0.08rem solid color('red-color');
+  }
+
+  &.valid {
+    border: 0.08rem solid color('active-input-border');
+  }
+}

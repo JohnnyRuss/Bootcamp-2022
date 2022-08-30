@@ -56,7 +56,7 @@ const validationDirections = {
     options: { key: 'ლეპტოპის ფასი' },
   },
   laptopState: {
-    validate: ['notEmpty', 'georgianLetters'],
+    validate: ['notEmpty'],
     options: { key: 'ლეპტოპის მდგომარეობა', enum: ['ახალი', 'მეორადი'] },
   },
 };

@@ -63,6 +63,11 @@ export function formReducer(state, action) {
         ...state,
         file: { ...initialFile },
       };
+    case 'RESET_FORM':
+      return {
+        ...state,
+        ...formState,
+      };
     default:
       return state;
   }

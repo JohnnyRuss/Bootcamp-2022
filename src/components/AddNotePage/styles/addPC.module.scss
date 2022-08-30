@@ -6,7 +6,6 @@
   display: grid;
   grid-template: 42.3rem repeat(8, min-content) / repeat(6, 1fr);
   align-items: center;
-  //   column-gap: 1.8rem;
   row-gap: 4.2rem;
   background: color('white-color');
   border-radius: $radius-big;

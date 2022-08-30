@@ -2,15 +2,18 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { FormContext } from '../../store/FormProvider';
-import { useForm, useFormValidation } from '../../hooks';
+import { useForm, useFormValidation, useAxios } from '../../hooks';
 import { getLocaleStorage } from '../../utils/getLocalData';
 
 import styles from './styles/addPC.module.scss';
-import { InputField, SelectField, UploadMediaBox, RadioBlock } from './components';
+import { InputField, SelectField, UploadMediaBox, RadioBlock, StatePopUp } from './components';
 import { PrimaryButton } from '../Layouts';
 
 function AddPC() {
   const naviagte = useNavigate();
+  const { data: selectOptions } = useAxios('getAllQuery', {
+    paths: ['brands', 'cpus'],
+  });
 
   const {
     handleType,
@@ -87,7 +90,6 @@ function AddPC() {
     errorPrice.valid &&
     errorLaptopState.valid;
 
-
   useEffect(() => {
     setValidForm((prev) => ({ ...prev, validPCInfo: validPcInfo }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,10 +107,11 @@ function AddPC() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { handleSubmit } = useForm();
+  const { handleSubmit, loading, error } = useForm();
 
   return (
     <form className={styles.addPcForm}>
+      <StatePopUp loading={loading} error={error} />
       <UploadMediaBox
         file={file.file}
         dragOver={file.dragOver}
@@ -132,7 +135,7 @@ function AddPC() {
       />
       <SelectField
         label='ლეპტოპის ბრენდი'
-        list={['asus', 'hp', 'acer', 'lenovo']}
+        list={selectOptions?.brands ? selectOptions.brands : []}
         value={pcData?.laptopBrandId}
         name='laptopBrandId'
         onSelect={(name, value) => handleField({ name, value })}
@@ -144,10 +147,10 @@ function AddPC() {
       <hr className={styles['col-6']} />
       <SelectField
         label='CPU'
-        list={['asus', 'hp', 'acer', 'lenovo']}
+        list={selectOptions?.cpus ? selectOptions.cpus : []}
         value={pcData?.laptopCpu}
         name='laptopCpu'
-        onSelect={(name, value) => handleField({ name, value })}
+        onSelect={(name, _, value) => handleField({ name, value })}
         onFocus={onFocusCPU}
         onBlur={onBlurCPU}
         valid={errorCPU}
@@ -235,12 +238,12 @@ function AddPC() {
           {
             id: 'new',
             label: 'ახალი',
-            value: 'ახალი',
+            value: 'new',
           },
           {
             id: 'secondary',
             label: 'მეორადი',
-            value: 'მეორადი',
+            value: 'used',
           },
         ]}
         onChange={(e) => handleField(e.target)}

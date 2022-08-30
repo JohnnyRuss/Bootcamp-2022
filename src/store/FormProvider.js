@@ -1,6 +1,11 @@
 import { createContext, useEffect, useState, useRef, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getFormDataFromLocal, getLocaleStorage, setDataToLocale } from '../utils/getLocalData';
+import {
+  getFormDataFromLocal,
+  getLocaleStorage,
+  removeFromLocale,
+  setDataToLocale,
+} from '../utils/getLocalData';
 import { formReducer, formState } from './formReducer';
 
 export const FormContext = createContext({
@@ -13,8 +18,11 @@ export const FormContext = createContext({
   pcData: {},
   file: {},
   fileRef: {},
+  teamId: '',
+  setTeamId: (id) => {},
   discardMediaHandler: () => {},
   handleField: ({ name, value }) => {},
+  setSumbited: () => {},
 });
 
 function FormProvider({ children }) {
@@ -30,6 +38,9 @@ function FormProvider({ children }) {
   /////////////////////////////////////////////////
   // final validation
   /////////////////////////////////////////////////
+
+  const [sumbited, setSumbited] = useState(false);
+
   const [validForm, setValidForm] = useState({
     validCollaborator: false,
     validPCInfo: false,
@@ -37,8 +48,10 @@ function FormProvider({ children }) {
 
   const { validCollaborator, validPCInfo } = validForm;
 
+  // saves information about page validation
   useEffect(() => {
     const valid = getLocaleStorage('validUpdate');
+
     setDataToLocale('validUpdate', {
       validCollaborator: valid?.validCollaborator ? true : validCollaborator,
       validPCInfo: valid?.validPCInfo ? true : validPCInfo,
@@ -53,6 +66,7 @@ function FormProvider({ children }) {
   const handleType = (tp) => setType(tp);
   const fileRef = useRef();
   const imgFile = file.file;
+  const [teamId, setTeamId] = useState('');
 
   /**
    * runs whenever selected data will change and in the 1s delayed timer reserves data to localeStorage.
@@ -61,12 +75,22 @@ function FormProvider({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       const { reservedData } = getFormDataFromLocal();
+      const tmId = getLocaleStorage('teamId');
 
-      if (type === 'collaboratorData')
+      if (sumbited) {
+        removeFromLocale('reservedInfo');
+        removeFromLocale('validUpdate');
+        return;
+      }
+
+      if (type === 'collaboratorData') {
         setDataToLocale('reservedInfo', {
           collaboratorData: collaboratorData,
           pcData: reservedData?.pcData,
         });
+
+        if (!tmId?.tmId && teamId) setDataToLocale('teamId', { tmId: teamId });
+      }
 
       if (type === 'pcData')
         setDataToLocale('reservedInfo', {
@@ -76,7 +100,7 @@ function FormProvider({ children }) {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [collaboratorData, pcData, type]);
+  }, [collaboratorData, pcData, type, teamId, sumbited]);
 
   /**
    * runs on component did mount and checks if reserved data exists and checks last validation state. if exists reSets them
@@ -84,6 +108,7 @@ function FormProvider({ children }) {
   useEffect(() => {
     const { reservedData, existingCollaboratorData, existingPcData } = getFormDataFromLocal();
     const valid = getLocaleStorage('validUpdate');
+    const tmId = getLocaleStorage('teamId');
 
     if (existingPcData)
       dispatchForm({ type: 'SET_GLOBAL', target: 'pcData', value: reservedData.pcData });
@@ -94,6 +119,8 @@ function FormProvider({ children }) {
         target: 'collaboratorData',
         value: reservedData.collaboratorData,
       });
+
+    if (tmId?.tmId) setTeamId(tmId.tmId);
 
     if (valid) setValidForm(valid);
   }, []);
@@ -132,6 +159,7 @@ function FormProvider({ children }) {
   return (
     <FormContext.Provider
       value={{
+        setSumbited,
         handleType,
         validCollaborator,
         validPCInfo,
@@ -142,6 +170,8 @@ function FormProvider({ children }) {
         file,
         fileRef,
         discardMediaHandler,
+        teamId,
+        setTeamId,
         handleField,
       }}>
       {children}
