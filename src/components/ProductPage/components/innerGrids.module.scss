@@ -1,0 +1,56 @@
+@use '../../../styles//helpers/helpers' as *;
+
+.inner-grid {
+  display: grid;
+  grid-template-columns: 22.5rem max-content;
+  column-gap: 3.5rem;
+
+  @include respond(tab-portrate) {
+    grid-template-columns: repeat(2, minmax(30rem, 1fr));
+  }
+
+  @include respond(phone) {
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 100%;
+  }
+
+  .inner-grid__keys {
+    font-weight: weight('bolder-weight');
+    color: color('dark-grey-color');
+  }
+
+  .inner-grid__values {
+    color: color('dark-grey-color-3');
+  }
+}
+
+.userDetails {
+  width: max-content;
+
+  @include respond(phone-small) {
+    width: auto;
+  }
+}
+
+.pcDetails,
+.extraInfo {
+  grid-column: 1/-1;
+  @include flexBox;
+  @include flexProperty(space-between);
+  gap: 6.8rem;
+
+  @include respond(tab-portrate) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  @include respond(phone) {
+    min-width: 100%;
+  }
+}
+
+.pcDetails .inner-grid,
+.extraInfo .inner-grid {
+  flex: 1;
+}

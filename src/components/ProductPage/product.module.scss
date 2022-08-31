@@ -1,0 +1,54 @@
+@use '../../styles/helpers/helpers' as *;
+
+.productContainer {
+  margin-bottom: 3rem;
+
+  @include respond(tab-landscape) {
+    padding: 0 1.5rem;
+  }
+
+  .detailsBox {
+    display: grid;
+    grid-template: repeat(5, min-content) / repeat(2, 1fr);
+    row-gap: 5.4rem;
+    column-gap: 6.8rem;
+    max-width: 110rem;
+    margin: 0 auto;
+    line-height: 2.4;
+    font-size: size('bigSize');
+
+    @include respond(tab-portrate) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(auto, min-content);
+      justify-items: center;
+      gap: 3rem;
+    }
+  }
+
+  .productFig {
+    grid-row: 1;
+    grid-column: 1;
+    max-height: 34rem;
+
+    & img {
+      @include fitImage;
+    }
+
+    @include respond(tab-portrate) {
+      max-height: 26rem;
+      aspect-ratio: 2/1;
+      justify-self: center;
+    }
+
+    @include respond(phone-small) {
+      max-height: 19rem;
+    }
+  }
+
+  .hr-1,
+  .hr-2 {
+    grid-row: auto;
+    grid-column: 1/-1;
+    min-width: 100%;
+  }
+}

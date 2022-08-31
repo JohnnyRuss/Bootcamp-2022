@@ -3,4 +3,16 @@
 .landingStand {
   margin-top: 8.5rem;
   margin-bottom: 12.3rem;
+  width: 55rem;
+  height: 30rem;
+  background: url('../../../../public/assets/landing-back.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  @include respond(phone-small) {
+    background: url('../../../../public/assets/landing-back-mobile.svg');
+    width: 30rem;
+    height: 38.8rem;
+  }
 }

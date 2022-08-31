@@ -1,6 +1,11 @@
 import { createContext, useEffect, useState, useRef, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getFormDataFromLocal, getLocaleStorage, setDataToLocale } from '../utils/getLocalData';
+import {
+  getFormDataFromLocal,
+  getLocaleStorage,
+  removeFromLocale,
+  setDataToLocale,
+} from '../utils/getLocalData';
 import { formReducer, formState } from './formReducer';
 
 export const FormContext = createContext({
@@ -13,8 +18,10 @@ export const FormContext = createContext({
   pcData: {},
   file: {},
   fileRef: {},
-  discardMediaHandler: () => {},
+  teamId: '',
+  setTeamId: (id) => {},
   handleField: ({ name, value }) => {},
+  setSumbited: () => {},
 });
 
 function FormProvider({ children }) {
@@ -29,7 +36,10 @@ function FormProvider({ children }) {
 
   /////////////////////////////////////////////////
   // final validation
+  // *this code block is used for save validation information after window reload
   /////////////////////////////////////////////////
+  const [sumbited, setSumbited] = useState(false);
+
   const [validForm, setValidForm] = useState({
     validCollaborator: false,
     validPCInfo: false,
@@ -39,6 +49,7 @@ function FormProvider({ children }) {
 
   useEffect(() => {
     const valid = getLocaleStorage('validUpdate');
+
     setDataToLocale('validUpdate', {
       validCollaborator: valid?.validCollaborator ? true : validCollaborator,
       validPCInfo: valid?.validPCInfo ? true : validPCInfo,
@@ -47,12 +58,17 @@ function FormProvider({ children }) {
 
   /////////////////////////////////////////////////
   // forms state
+  // * this code block is used for save and update user data as in reducer state as well in the locale storage
   /////////////////////////////////////////////////
   const [{ collaboratorData, pcData, file }, dispatchForm] = useReducer(formReducer, formState);
+  // type defines on which form update step is user: "collaborator" || "pcData"
   const [type, setType] = useState('');
   const handleType = (tp) => setType(tp);
+  // saves file
   const fileRef = useRef();
   const imgFile = file.file;
+  // saves chosen team id after window reload
+  const [teamId, setTeamId] = useState('');
 
   /**
    * runs whenever selected data will change and in the 1s delayed timer reserves data to localeStorage.
@@ -61,12 +77,22 @@ function FormProvider({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       const { reservedData } = getFormDataFromLocal();
+      const tmId = getLocaleStorage('teamId');
 
-      if (type === 'collaboratorData')
+      if (sumbited) {
+        removeFromLocale('reservedInfo');
+        removeFromLocale('validUpdate');
+        return;
+      }
+
+      if (type === 'collaboratorData') {
         setDataToLocale('reservedInfo', {
           collaboratorData: collaboratorData,
           pcData: reservedData?.pcData,
         });
+
+        if (!tmId?.tmId && teamId) setDataToLocale('teamId', { tmId: teamId });
+      }
 
       if (type === 'pcData')
         setDataToLocale('reservedInfo', {
@@ -76,14 +102,15 @@ function FormProvider({ children }) {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [collaboratorData, pcData, type]);
+  }, [collaboratorData, pcData, type, teamId, sumbited]);
 
   /**
-   * runs on component did mount and checks if reserved data exists and checks last validation state. if exists reSets them
+   * runs on component did mount and checks if reserved data exists like formData,tmId and validation data. if information exists reSets it
    */
   useEffect(() => {
     const { reservedData, existingCollaboratorData, existingPcData } = getFormDataFromLocal();
     const valid = getLocaleStorage('validUpdate');
+    const tmId = getLocaleStorage('teamId');
 
     if (existingPcData)
       dispatchForm({ type: 'SET_GLOBAL', target: 'pcData', value: reservedData.pcData });
@@ -95,14 +122,12 @@ function FormProvider({ children }) {
         value: reservedData.collaboratorData,
       });
 
+    if (tmId?.tmId) setTeamId(tmId.tmId);
+
     if (valid) setValidForm(valid);
   }, []);
 
-  function discardMediaHandler() {
-    if (fileRef.current) fileRef.current.value = '';
-    dispatchForm({ type: 'RESET_FILE' });
-  }
-
+  // vlidated image
   useEffect(() => {
     function isImg() {
       if (imgFile?.type?.split('/')?.[0] !== 'image' || !imgFile?.size)
@@ -121,6 +146,7 @@ function FormProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgFile]);
 
+  // is used on all the onChange event onto the form
   const handleField = (e) =>
     dispatchForm({
       type: 'ON_CHANGE',
@@ -132,6 +158,7 @@ function FormProvider({ children }) {
   return (
     <FormContext.Provider
       value={{
+        setSumbited,
         handleType,
         validCollaborator,
         validPCInfo,
@@ -141,7 +168,8 @@ function FormProvider({ children }) {
         pcData,
         file,
         fileRef,
-        discardMediaHandler,
+        teamId,
+        setTeamId,
         handleField,
       }}>
       {children}

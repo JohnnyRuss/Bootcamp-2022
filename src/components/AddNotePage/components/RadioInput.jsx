@@ -1,4 +1,4 @@
-import styles from './radioInput.module.scss';
+import styles from './styles/radioInput.module.scss';
 
 function RadioInput({ id, label, name, value, onChange, checked }) {
   return (

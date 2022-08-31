@@ -1,3 +1,8 @@
+/**
+ * transforms local-form-key-pairs to coresponding db-key-pairs
+ * @param {String} str field key
+ * @returns db field name
+ */
 function generateDBKeyPairs(str) {
   const strArr = [...str];
   for (let i = 0; i < str.length; i++) {

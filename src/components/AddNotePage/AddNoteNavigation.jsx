@@ -17,12 +17,14 @@ function AddNoteNavigation() {
             pathname.includes('collaborator-info') ? styles.addNoteNavListItemActive : ''
           }`}>
           <Link to='collaborator-info'>თანამშრომლის ინფო</Link>
+          <p className={styles.pageCounter}>1/2</p>
         </li>
         <li
           className={`${styles.addNoteNavListItem} ${
             pathname.includes('pc-info') ? styles.addNoteNavListItemActive : ''
           } ${!validCollaborator ? styles.disabled : ''}`}>
           <Link to={validCollaborator ? 'pc-info' : pathname}>ლეპტოპის მახასიათებლები</Link>
+          <p className={styles.pageCounter}>2/2</p>
         </li>
       </ul>
     </nav>

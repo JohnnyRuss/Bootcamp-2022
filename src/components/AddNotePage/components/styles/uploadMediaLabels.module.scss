@@ -1,0 +1,62 @@
+@use '../../../../styles/helpers/helpers' as *;
+
+.uploadMediaCaption {
+  position: relative;
+  color: color('blue-shade-color');
+  max-width: 19.5rem;
+  text-align: center;
+
+  @include respond(phone-small) {
+    top: 3rem;
+  }
+
+  &.invalid {
+    color: color('red-color');
+  }
+
+  &.invalid::before {
+    content: url('../../../../../public/assets/error-icon.svg');
+    position: absolute;
+    z-index: 99;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    content: 'ჩააგდე ან ატვირთე ლეპტოპის ფოტო';
+
+    @include respond(phone-small) {
+      content: 'ლეპტოპის ფოტოს ატვირთვა';
+    }
+  }
+
+  &.invalid::after {
+    content: attr(data-message);
+  }
+
+  &::before {
+    content: '';
+
+    @include respond(phone-small) {
+      content: url('../../../../../public/assets/camera-icon.svg');
+      position: absolute;
+      top: -150%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.uploadBtn {
+  @include btn;
+  padding: 1.8rem 6rem;
+
+  @include respond(phone-small) {
+    display: none;
+  }
+}
+
+.flInp {
+  display: none;
+}

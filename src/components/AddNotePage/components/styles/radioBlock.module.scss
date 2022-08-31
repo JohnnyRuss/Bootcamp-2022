@@ -1,4 +1,4 @@
-@use '../../../styles//helpers/helpers' as *;
+@use '../../../../styles/helpers/helpers' as *;
 
 .radioFields {
   @include flexBox(column);
@@ -7,20 +7,26 @@
   grid-column: span 3;
   align-self: start;
 
+  @include respond(tab-portrate) {
+    grid-column: 1;
+  }
+
   .radioCaption {
     position: relative;
     width: max-content;
+    max-width: 100%;
+    font-weight: weight('bolder-weight');
 
     &.invalid {
       color: color('red-color');
 
       &::after {
-        content: url('../../../../public/assets/error-icon.svg');
+        content: url('../../../../../public/assets/error-icon.svg');
         display: block;
         width: 2.2rem;
         height: 2.2rem;
         position: absolute;
-        z-index: 999;
+        z-index: 99;
         top: 50%;
         right: -3rem;
         transform: translateY(-35%);

@@ -1,11 +1,13 @@
-import styles from './radioBlock.module.scss';
+import styles from './styles/radioBlock.module.scss';
 import RadioInput from './RadioInput';
 import { uid } from 'uid';
 
 function RadioBlock({ caption, name, radios, onChange, valid, userValue }) {
   return (
     <div className={styles.radioFields}>
-      <p className={`${styles.radioCaption} ${valid.error ? styles.invalid : ''}`}>{caption}</p>
+      <p className={`${styles.radioCaption} ${valid.error ? styles.invalid : ''}`}>
+        {valid.error && valid.message ? valid.message : caption}
+      </p>
       <fieldset className={styles.horizontalDevider}>
         {radios.map((rad) => (
           <RadioInput
