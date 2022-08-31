@@ -1,0 +1,8 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.spinnerFig {
+  svg {
+    animation: spinner 1.5s infinite;
+    @include CenterAbsPos(relative);
+  }
+}

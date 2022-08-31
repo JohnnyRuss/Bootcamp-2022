@@ -15,14 +15,17 @@ function InputField({
   col,
 }) {
   return (
-    <div className={`${styles.formField} ${styles[`col-${col}`]}`}>
+    <div
+      className={`${styles.formField} ${styles[`col-${col}`]} ${
+        valid?.error ? styles.invalid : valid?.valid ? styles.valid : ''
+      }`}>
       <label htmlFor={id} className={styles.inpLabel}>
         {label}
       </label>
       <div
-        className={`${styles.inpWrapper} ${
-          valid?.error ? styles.invalid : valid?.valid ? styles.valid : ''
-        }`}>
+        className={`${styles.inpWrapper} 
+        
+        `}>
         <input
           type={type}
           id={id}

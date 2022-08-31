@@ -1,0 +1,74 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.popUp {
+  background: color('dark-grey-color-2');
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &Window {
+    @include CenterAbsPos;
+    width: 60vw;
+    height: 75vh;
+    @include flexBox(column);
+    @include flexProperty(center, center);
+    gap: 2rem;
+    background: color('white-color');
+    border-radius: $radius-small;
+    animation: scaleUp 0.5s forwards;
+
+    @include respond(phone-small) {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template: 20vh repeat(2, min-content) 16rem repeat(2, min-content) / repeat(1, 1fr);
+      justify-items: center;
+    }
+  }
+
+  &WindowFig {
+    @include flexBox;
+    @include flexProperty(center, center);
+    transform: translate(10%, 20%);
+
+    @include respond(phone-small) {
+      grid-row: 2;
+    }
+  }
+
+  .successMsg {
+    font-weight: weight('extra-bold-weight');
+    font-size: size('largeSize');
+
+    @include respond(phone-small) {
+      grid-row: 3;
+    }
+  }
+
+  & a:not(:last-child) {
+    margin-top: auto;
+
+    @include respond(phone-small) {
+      grid-row: 5;
+    }
+  }
+
+  & a:last-child {
+    margin-bottom: 4rem;
+
+    @include respond(phone-small) {
+      grid-row: 6;
+    }
+  }
+
+  .btn {
+    padding: 1.8rem 3rem;
+  }
+
+  .btn.mainBtn {
+    background: none;
+    color: color('blue-primary-color');
+  }
+}

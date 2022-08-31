@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useFormValidation } from '../../hooks';
+import { useFormValidation, useAxios } from '../../hooks';
 import { FormContext } from '../../store/FormProvider';
 
 import styles from './styles/addCollaborator.module.scss';
@@ -9,9 +9,14 @@ import { PrimaryButton } from '../Layouts';
 import { InputField, SelectField } from './components';
 
 function AddCollaborator() {
+  const { data: selectOptions } = useAxios('getAllQuery', {
+    paths: ['teams', 'positions'],
+  });
+  
   const navigate = useNavigate();
 
-  const { handleType, setValidForm, collaboratorData, handleField } = useContext(FormContext);
+  const { handleType, teamId, setTeamId, setValidForm, collaboratorData, handleField } =
+    useContext(FormContext);
 
   const {
     onFocus: onFocusName,
@@ -100,10 +105,13 @@ function AddCollaborator() {
       />
       <SelectField
         label='თიმი'
-        list={['hr', 'manager', 'developer', 'instructor']}
-        name="teamId"
+        list={selectOptions?.teams ? selectOptions.teams : []}
+        name='teamId'
         value={collaboratorData.teamId}
-        onSelect={(name, value) => handleField({ name, value })}
+        onSelect={(name, value) => {
+          setTeamId(value);
+          handleField({ name, value });
+        }}
         onFocus={onFocusTeam}
         onBlur={onBlurTeam}
         valid={errorTeam}
@@ -111,8 +119,12 @@ function AddCollaborator() {
       />
       <SelectField
         label='პოზიცია'
-        list={['hr', 'manager', 'developer', 'instructor']}
-        name="positionId"
+        list={
+          selectOptions?.positions
+            ? selectOptions.positions.filter((pos) => pos.team_id === teamId)
+            : []
+        }
+        name='positionId'
         value={collaboratorData.positionId}
         onSelect={(name, value) => handleField({ name, value })}
         onFocus={onFocusPosition}
@@ -125,7 +137,7 @@ function AddCollaborator() {
         name='email'
         label='მეილი'
         hint='უნდა მთავრდებოდეს @redberry.ge_ით'
-        value={collaboratorData.meil}
+        value={collaboratorData.email}
         onChange={(e) => handleField(e.target)}
         onFocus={onFocusEmail}
         onBlur={onBlurEmail}

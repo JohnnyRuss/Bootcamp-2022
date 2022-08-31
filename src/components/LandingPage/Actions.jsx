@@ -8,7 +8,9 @@ function Actions() {
       <Link to='add-note/collaborator-info'>
         <PrimaryButton className={styles.actionsBtn}>ჩანაწერის დამატება</PrimaryButton>
       </Link>
-      <PrimaryButton className={styles.actionsBtn}>ჩანაწერების სია</PrimaryButton>
+      <Link to='/note-list'>
+        <PrimaryButton className={styles.actionsBtn}>ჩანაწერების სია</PrimaryButton>
+      </Link>
     </div>
   );
 }

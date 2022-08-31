@@ -1,0 +1,38 @@
+@use '../../styles/helpers/helpers' as *;
+
+.notesContainer {
+  margin-bottom: 3rem;
+
+  @include respond(tab-landscape) {
+    padding: 0 2.5rem;
+  }
+
+  @include respond(phone-small) {
+    padding: 0 1.6rem;
+  }
+
+  .notesList {
+    max-width: 116rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5.2rem;
+    grid-auto-rows: 20rem;
+    font-size: size('bigSize');
+
+    @include respond(tab-landscape) {
+      gap: 3.5rem;
+    }
+
+    @include respond(tab-portrate) {
+      grid-template-columns: repeat(1, 1fr);
+      justify-items: center;
+      gap: 3.5rem;
+    }
+
+    @include respond(phone-small) {
+      gap: 2.5rem;
+      grid-auto-rows: 12.5rem;
+    }
+  }
+}

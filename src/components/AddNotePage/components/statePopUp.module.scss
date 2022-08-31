@@ -1,0 +1,20 @@
+@use '../../../styles/helpers/helpers' as *;
+
+.statePopUp {
+  @include CenterAbsPos(fixed, -50%, -50%);
+  z-index: 999;
+  @include flexBox(column);
+  @include flexProperty(center, center);
+  padding: 1rem 4rem;
+  font-size: size('largeSize');
+  text-align: center;
+  border-radius: 0.5rem;
+  background: rgba(color('black-color'), 0.5);
+  color: color('white-color');
+  @include boxShadowBlack(0, 1rem, 0.5);
+
+  & img {
+    width: 3rem;
+    height: 3rem;
+  }
+}

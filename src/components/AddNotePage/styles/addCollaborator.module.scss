@@ -10,8 +10,6 @@
   background: color('white-color');
   border-radius: $radius-big;
   @include boxShadowBlack(0, 0.5rem, 0.1);
- 
-
 
   .btnNext {
     padding: 1.8rem 4.5rem;
@@ -19,5 +17,31 @@
     font-weight: weight('bold-weight');
     grid-column: 2;
     justify-self: end;
+  }
+
+  @include respond(tab-portrate) {
+    grid-template: repeat(1, min-content) / repeat(1, 1fr);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 6rem 12rem;
+
+    .btnNext {
+      grid-column: 1/-1;
+      margin-right: 2.2rem;
+    }
+  }
+
+  @include respond(phone) {
+    padding: 3.8rem 0;
+  }
+
+  @include respond(phone-small) {
+    margin-top: 1rem;
+    row-gap: 3rem;
+
+    .btnNext {
+      font-size: size('bigSize');
+      padding: 1.2rem 2.75rem;
+    }
   }
 }
