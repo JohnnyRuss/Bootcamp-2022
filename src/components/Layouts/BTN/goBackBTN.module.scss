@@ -12,4 +12,13 @@
   position: fixed;
   left: 7rem;
   top: 5.3rem;
+
+  @include respond(tab-portrate) {
+    position: relative;
+    width: auto;
+    height: auto;
+    top: 2rem;
+    left: 2rem;
+    background: none;
+  }
 }

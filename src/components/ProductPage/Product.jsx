@@ -10,7 +10,7 @@ import { GoBackBTN, PageTitle, Spinner } from '../Layouts';
 function Product() {
   //prettier-ignore
   const {state: { key }} = useLocation();
-
+  const API_END_POINT_ROOT = process.env.REACT_APP_API_END_POINT_ROOT;
   const { data, loading } = useAxios('getQuery', {
     path: 'laptop',
     id: key,
@@ -26,7 +26,7 @@ function Product() {
         {!loading && data && (
           <div className={styles.detailsBox}>
             <figure className={styles.productFig}>
-              <img src={`https://pcfy.redberryinternship.ge/${data.laptop.image}`} alt='product' />
+              <img src={`${API_END_POINT_ROOT}${data.laptop.image}`} alt='product' loading='lazy' />
             </figure>
             <UserInfo data={data} />
             <hr className={styles['hr-1']} />

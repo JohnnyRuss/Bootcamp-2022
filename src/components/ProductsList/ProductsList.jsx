@@ -7,7 +7,6 @@ import Card from './components/Card';
 
 function ProductsList() {
   const { data, loading } = useAxios('getQuery', { path: 'laptops', withToken: true });
-
   return (
     <>
       <GoBackBTN path='/' />

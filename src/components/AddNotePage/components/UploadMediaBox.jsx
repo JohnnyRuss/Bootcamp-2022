@@ -33,9 +33,10 @@ function UploadMediaBox({
       }}>
       {(!file || valid.error) && (
         <>
-          <span className={styles.uploadMediaCaption}>
-            {valid.error ? valid.message : 'ჩააგდე ან ატვირთე ლეპტოპის ფოტო'}
-          </span>
+          <label
+            htmlFor='file'
+            className={`${styles.uploadMediaCaption} ${valid.error ? styles.withMessage : ''}`}
+            data-message={valid.message}></label>
           <label htmlFor='file' className={styles.uploadBtn}>
             ატვირთე
           </label>

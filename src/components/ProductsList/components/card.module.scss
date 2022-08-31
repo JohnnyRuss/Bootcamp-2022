@@ -2,6 +2,7 @@
 
 .noteItem {
   @include flexBox;
+  width: 100%;
   max-width: 56.3rem;
   gap: 2.8rem;
   padding: 1.4rem;
@@ -9,10 +10,22 @@
   border-radius: $radius-big;
   background: color('blue-tint-color-2');
 
+  @include respond(tab-landscape) {
+    padding: 1rem;
+    gap: 2rem;
+    border-radius: $radius-small;
+  }
+
+  @include respond(phone-small) {
+    padding: 0.7rem;
+    gap: 1.6rem;
+  }
+
   .noteFig {
     flex: 1;
     border-radius: $radius-small;
     overflow: hidden;
+
     img {
       @include fitImage;
     }
@@ -23,10 +36,22 @@
     @include flexBox(column);
     gap: 1.8rem;
     padding: 3rem 0 2.4rem 0;
+
+    @include respond(phone-small) {
+      gap: 0.8rem;
+      padding: 1.4rem 0;
+    }
   }
 
   .author {
     font-weight: weight('bold-weight');
+    @include respond(phone-small) {
+      font-size: size('smallSize');
+    }
+  }
+
+  .pcName {
+    text-transform: capitalize;
   }
 
   .moreBtn {
@@ -35,5 +60,9 @@
     color: color('blue-shade-color');
     text-decoration: underline;
     font-size: size('regullarSize');
+
+    @include respond(phone-small) {
+      font-size: size('smallSize');
+    }
   }
 }

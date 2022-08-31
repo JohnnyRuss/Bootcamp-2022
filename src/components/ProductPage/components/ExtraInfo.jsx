@@ -2,7 +2,7 @@ import styles from './innerGrids.module.scss';
 
 function ExtraInfo({ data }) {
   return (
-    <>
+    <div className={styles.extraInfo}>
       <div className={styles['inner-grid']}>
         <p className={styles['inner-grid__keys']}>ლეპტოპის მდგომარეობა:</p>
         <p className={styles['inner-grid__values']}>{data.laptop.state}</p>
@@ -13,7 +13,7 @@ function ExtraInfo({ data }) {
         <p className={styles['inner-grid__keys']}>შევსების რიცხვი:</p>
         <p className={styles['inner-grid__values']}>{data.laptop?.purchase_date}</p>
       </div>
-    </>
+    </div>
   );
 }
 

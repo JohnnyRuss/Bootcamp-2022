@@ -9,10 +9,27 @@
     gap: 6.6rem;
     font-size: size('largeSize');
     color: color('black-secondary');
+
+    @include respond(phone-small) {
+      font-size: size('regullarSize');
+    }
   }
 
   &ListItem {
     position: relative;
+
+    & a {
+      font-weight: weight('extra-bold-weight');
+    }
+
+    @include respond(phone) {
+      display: none;
+    }
+
+    &Active {
+      @include flexBox(column);
+      @include flexProperty(center, center);
+    }
 
     &Active::after {
       content: '';
@@ -22,10 +39,22 @@
       width: 80%;
       height: 0.2rem;
       background: color('black-secondary');
+
+      @include respond(phone) {
+        display: none;
+      }
     }
 
     &.disabled {
       opacity: 0.5;
+    }
+  }
+
+  .pageCounter {
+    display: none;
+
+    @include respond(phone) {
+      display: block;
     }
   }
 }

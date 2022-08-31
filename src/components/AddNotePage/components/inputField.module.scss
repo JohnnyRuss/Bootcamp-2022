@@ -3,11 +3,35 @@
 .formField {
   @include flexBox(column);
   gap: 0.8rem;
-  padding: 0.8rem 2.4rem 0.8rem 2.4rem;
+  padding: 0.8rem 2.4rem;
+
+  &.invalid .inpLabel,
+  &.invalid .inpWrapper ~ .hint {
+    color: color('red-color');
+  }
+
+  &.valid .inpWrapper::after {
+    content: url('../../../../public/assets/checked.svg');
+    display: block;
+    width: 2.2rem;
+    height: 2.2rem;
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-35%);
+
+    @include respond(phone-small) {
+      width: 1.6rem;
+      height: 1.6rem;
+      right: 1.5rem;
+      top: 40%;
+    }
+  }
 
   .inpLabel {
     color: color('blacl-color');
-    font-weight: weight('bold-weight');
+    font-weight: weight('bolder-weight');
     font-size: size('bigSize');
   }
 
@@ -31,22 +55,6 @@
     position: relative;
   }
 
-  .inpWrapper.valid::after {
-    content: url('../../../../public/assets/checked.svg');
-    display: block;
-    width: 2.2rem;
-    height: 2.2rem;
-    position: absolute;
-    z-index: 9;
-    top: 50%;
-    right: 0.5rem;
-    transform: translateY(-35%);
-  }
-
-  .inpWrapper.invalid ~ .hint {
-    color: color('red-color');
-  }
-
   .hint {
     font-size: size('smallSize');
     font-weight: weight('thin-weight');
@@ -67,5 +75,14 @@
 
   &.col-6-2 {
     grid-column: span 2;
+  }
+
+  @include respond(tab-portrate) {
+    &.col-1,
+    &.col-2,
+    &.col-6-3,
+    &.col-6-2 {
+      grid-column: 1;
+    }
   }
 }

@@ -7,9 +7,14 @@
   grid-column: span 3;
   align-self: start;
 
+  @include respond(tab-portrate) {
+    grid-column: 1;
+  }
+
   .radioCaption {
     position: relative;
     width: max-content;
+    font-weight: weight('bolder-weight');
 
     &.invalid {
       color: color('red-color');
