@@ -17,7 +17,7 @@ function UserInfo({ data }) {
   }, [selectOptions, data]);
 
   return (
-    <div className={styles['inner-grid']}>
+    <div className={`${styles['inner-grid']} ${styles.userDetails}`}>
       <p className={styles['inner-grid__keys']}>სახელი:</p>
       <p className={styles['inner-grid__values']}>{data.user.name}</p>
       <p className={styles['inner-grid__keys']}>თიმი:</p>

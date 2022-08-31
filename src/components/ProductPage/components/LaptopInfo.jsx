@@ -13,26 +13,26 @@ function LaptopInfo({ data }) {
   }, [brands, data]);
 
   return (
-    <>
-      <div className={styles['inner-grid']}>
-        <p className={styles['inner-grid__keys']}>ლეპტოპის სახელი:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.name}</p>
-        <p className={styles['inner-grid__keys']}>ლეპტოპის ბრენდი:</p>
-        <p className={styles['inner-grid__values']}>{brand}</p>
-        <p className={styles['inner-grid__keys']}>RAM:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.ram}</p>
-        <p className={styles['inner-grid__keys']}>მეხსიერების ტიპი:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.hard_drive_type}</p>
+      <div className={styles.pcDetails}>
+        <div className={styles['inner-grid']}>
+          <p className={styles['inner-grid__keys']}>ლეპტოპის სახელი:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.name}</p>
+          <p className={styles['inner-grid__keys']}>ლეპტოპის ბრენდი:</p>
+          <p className={styles['inner-grid__values']}>{brand}</p>
+          <p className={styles['inner-grid__keys']}>RAM:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.ram}</p>
+          <p className={styles['inner-grid__keys']}>მეხსიერების ტიპი:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.hard_drive_type}</p>
+        </div>
+        <div className={styles['inner-grid']}>
+          <p className={styles['inner-grid__keys']}>CPU:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.cpu.name}</p>
+          <p className={styles['inner-grid__keys']}>CPU_ს ბირთვი:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.cpu.cores}</p>
+          <p className={styles['inner-grid__keys']}>CPU_ს ნაკადი:</p>
+          <p className={styles['inner-grid__values']}>{data.laptop.cpu.threads}</p>
+        </div>
       </div>
-      <div className={styles['inner-grid']}>
-        <p className={styles['inner-grid__keys']}>CPU:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.cpu.name}</p>
-        <p className={styles['inner-grid__keys']}>CPU_ს ბირთვი:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.cpu.cores}</p>
-        <p className={styles['inner-grid__keys']}>CPU_ს ნაკადი:</p>
-        <p className={styles['inner-grid__values']}>{data.laptop.cpu.threads}</p>
-      </div>
-    </>
   );
 }
 

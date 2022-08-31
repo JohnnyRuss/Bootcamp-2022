@@ -250,15 +250,17 @@ function AddPC() {
         valid={errorLaptopState}
         userValue={pcData.laptopState}
       />
-      <PrimaryButton className={`${styles.btn} ${styles.btnBack}`} onClick={handleRouteBack}>
-        უკან
-      </PrimaryButton>
-      <PrimaryButton
-        onClick={handleSubmit}
-        className={` ${styles.btn} ${styles.btnNext}`}
-        disabled={!validCollaborator || !validPcInfo}>
-        დამახსოვრება
-      </PrimaryButton>
+      <div className={styles.btnBox}>
+        <PrimaryButton className={`${styles.btn} ${styles.btnBack}`} onClick={handleRouteBack}>
+          უკან
+        </PrimaryButton>
+        <PrimaryButton
+          onClick={handleSubmit}
+          className={` ${styles.btn} ${styles.btnNext}`}
+          disabled={!validCollaborator || !validPcInfo}>
+          დამახსოვრება
+        </PrimaryButton>
+      </div>
     </form>
   );
 }

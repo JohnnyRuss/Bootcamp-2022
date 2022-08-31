@@ -12,7 +12,9 @@ function SelectBTN({ openSelect, setOpenSelect, onBlur, onFocus, list, value, la
         setOpenSelect((prev) => !prev);
       }}
       onFocus={onFocus}>
-      <span>{list.find((item) => item.id === value)?.name || label}</span>
+      <span className={valid?.valid ? '' : styles.default}>
+        {list.find((item) => item.id === value)?.name || label}
+      </span>
       <figure>
         <img src='/assets/select-arrow.svg' alt='select button icon' />
       </figure>

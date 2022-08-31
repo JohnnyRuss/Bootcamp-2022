@@ -10,6 +10,7 @@ function SuccessPopUp() {
         <figure className={styles.popUpWindowFig}>
           <img src='/assets/success.svg' alt='success' />
         </figure>
+        <p className={styles.successMsg}>ჩანაწერი დამატებულია!</p>
         <Link to='/note-list'>
           <PrimaryButton className={`${styles.btn} ${styles.listBtn}`}>
             სიაში გადაყვანა
