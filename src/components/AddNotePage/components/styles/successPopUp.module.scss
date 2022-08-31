@@ -1,4 +1,4 @@
-@use '../../../styles/helpers/helpers' as *;
+@use '../../../../styles/helpers/helpers' as *;
 
 .popUp {
   background: color('dark-grey-color-2');
@@ -7,6 +7,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 999;
 
   &Window {
     @include CenterAbsPos;
@@ -19,7 +20,7 @@
     border-radius: $radius-small;
     animation: scaleUp 0.5s forwards;
 
-    @include respond(phone-small) {
+    @include respond(tab-portrate) {
       width: 100vw;
       height: 100vh;
       display: grid;
@@ -33,7 +34,7 @@
     @include flexProperty(center, center);
     transform: translate(10%, 20%);
 
-    @include respond(phone-small) {
+    @include respond(tab-portrate) {
       grid-row: 2;
     }
   }
@@ -42,7 +43,7 @@
     font-weight: weight('extra-bold-weight');
     font-size: size('largeSize');
 
-    @include respond(phone-small) {
+    @include respond(tab-portrate) {
       grid-row: 3;
     }
   }
@@ -50,7 +51,7 @@
   & a:not(:last-child) {
     margin-top: auto;
 
-    @include respond(phone-small) {
+    @include respond(tab-portrate) {
       grid-row: 5;
     }
   }
@@ -58,7 +59,7 @@
   & a:last-child {
     margin-bottom: 4rem;
 
-    @include respond(phone-small) {
+    @include respond(tab-portrate) {
       grid-row: 6;
     }
   }

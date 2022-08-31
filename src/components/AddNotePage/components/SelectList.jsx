@@ -1,5 +1,5 @@
 import { uid } from 'uid';
-import styles from "./selectList.module.scss"
+import styles from "./styles/selectList.module.scss"
 
 function SelectList({ list, name, handleSelect }) {
   return (

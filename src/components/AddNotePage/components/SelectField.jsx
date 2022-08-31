@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from './selectField.module.scss';
+import styles from './styles/selectField.module.scss';
 import SelectBTN from './SelectBTN';
 import SelectList from './SelectList';
 

@@ -1,4 +1,5 @@
 @use './functions' as *;
+@use "../variables/variables" as*;
 
 // LAYOUTS
 @mixin flexBox($direction: row) {
@@ -11,17 +12,7 @@
   align-items: $align;
 }
 
-@mixin gridBoxAutoFill($min: auto) {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
-}
-
-@mixin gridBoxAutoFit($min: auto) {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
-}
-
-@mixin CenterAbsPos($pos:absolute,$x: -50%, $y: -50%) {
+@mixin CenterAbsPos($pos: absolute, $x: -50%, $y: -50%) {
   position: $pos;
   top: 50%;
   left: 50%;
@@ -43,6 +34,29 @@
   background-size: cover;
 }
 
+@mixin btn {
+  & {
+    background: color('blue-primary-color');
+    color: color('white-color');
+    border-radius: $radius-small;
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: color('blue-hover-color');
+  }
+
+  &:active,
+  &:focus {
+    background-color: color('dark-blue-color');
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
 // COLORS & EFFECTS
 @mixin boxShadowBlack($v: 1rem, $blur: 2rem, $opacity: 0.3, $radius: 0rem) {
   box-shadow: 0 $v $blur $radius rgba(0, 0, 0, $opacity);
@@ -54,42 +68,4 @@
 
 @mixin textShadow($y: 0.2rem, $v: 0.3rem, $opacity: 0.3, $blur: 0.5rem) {
   text-shadow: $y $v $blur rgba(0, 0, 0, $opacity);
-}
-
-@mixin lienearGradient(
-  $color-1,
-  $color-2,
-  $angle: 120deg,
-  $color-1-opacity: 1,
-  $color-2-opacity: 1,
-  $color-1-per: 0%,
-  $color-2-per: 100%
-) {
-  background: linear-gradient(
-    $angle,
-    rgba(color($color-1), $color-1-opacity) $color-1-per,
-    rgba(color($color-2), $color-2-opacity) $color-2-per
-  );
-}
-
-@mixin radialGradient($color-1, $color-2) {
-  background: radial-gradient(color($color-1), color($color-2));
-}
-
-@mixin bgGradientImage(
-  $color-1,
-  $color-2,
-  $image,
-  $color-1-opacity: 0.8,
-  $color-2-opacity: 0.8,
-  $angle: to right bottom,
-  $color-1-per: 0%,
-  $color-2-per: 100%
-) {
-  background: linear-gradient(
-      $angle,
-      rgba(color($color-1), $color-1-opacity) $color-1-per,
-      rgba(color($color-2), $color-2-opacity) $color-2-per
-    ),
-    url('../../../../public/assets/#{$image}');
 }

@@ -1,21 +1,5 @@
 @use '../../../styles/helpers/helpers' as *;
 
 .primaryBtn {
-  background: color('blue-primary-color');
-  color: color('white-color');
-  border-radius: $radius-small;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: color('blue-hover-color');
-  }
-  
-  &:active,
-  &:focus {
-    background-color: color('dark-blue-color');
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
+  @include btn;
 }
