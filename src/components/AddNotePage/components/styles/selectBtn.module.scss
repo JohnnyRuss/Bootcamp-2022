@@ -1,4 +1,4 @@
-@use '../../../styles/helpers/helpers' as *;
+@use '../../../../styles/helpers/helpers' as *;
 
 .selectBtn {
   @include flexBox;
@@ -7,6 +7,7 @@
   border-radius: $radius-small;
   padding: 0 1.6rem;
   height: 5rem;
+  outline: none;
 
   .default {
     font-weight: weight('bolder-weight');
@@ -22,5 +23,15 @@
 
   &.valid {
     border: 0.08rem solid color('active-input-border');
+  }
+
+  &:focus,
+  &:active {
+    outline: 0.08rem solid color('active-input-border');
+  }
+
+  &.invalid:focus,
+  &:invalid:active {
+    outline: none;
   }
 }

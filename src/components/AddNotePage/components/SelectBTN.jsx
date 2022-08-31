@@ -1,4 +1,4 @@
-import styles from './selectBtn.module.scss';
+import styles from './styles/selectBtn.module.scss';
 
 function SelectBTN({ openSelect, setOpenSelect, onBlur, onFocus, list, value, label, valid }) {
   return (

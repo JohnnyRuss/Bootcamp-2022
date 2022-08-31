@@ -1,4 +1,4 @@
-@use '../../../styles/helpers/helpers' as *;
+@use '../../../../styles/helpers/helpers' as *;
 
 .formField {
   @include flexBox(column);
@@ -11,7 +11,7 @@
   }
 
   &.valid .inpWrapper::after {
-    content: url('../../../../public/assets/checked.svg');
+    content: url('../../../../../public/assets/checked.svg');
     display: block;
     width: 2.2rem;
     height: 2.2rem;

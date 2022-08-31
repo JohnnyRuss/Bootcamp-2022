@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './statePopUp.module.scss';
+import styles from './styles/statePopUp.module.scss';
 
 function StatePopUp({ loading, error }) {
   const [closePopUp, setClosePopUp] = useState(true);

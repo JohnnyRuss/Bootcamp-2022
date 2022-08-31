@@ -1,3 +1,7 @@
+/**
+ *
+ * @returns existing form-data information and boolean values about which type of form-data exists and which not
+ */
 export function getFormDataFromLocal() {
   const reservedData = JSON.parse(localStorage.getItem('reservedInfo'));
 

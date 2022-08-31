@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 
 import { useAxios } from './';
 import { FormContext } from '../store/FormProvider';
@@ -18,9 +17,9 @@ function useForm() {
 
   const { sendQuery, loading, error } = useAxios();
 
-  const navigate = useNavigate();
-
   const valid = validCollaborator && validPCInfo;
+
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -45,13 +44,13 @@ function useForm() {
       setSumbited(true);
       dispatchForm({ type: 'RESET_FORM' });
 
-      navigate('/add-note/success');
+      setSuccess(true);
     } catch (error) {
       // console.log(error.message);
     }
   }
 
-  return { handleSubmit, loading, error };
+  return { handleSubmit, loading, error, success };
 }
 
 export default useForm;

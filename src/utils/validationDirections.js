@@ -1,3 +1,6 @@
+/**
+ * describes each form-data field, what kind of validation requests field must to pass
+ */
 const validationDirections = {
   name: {
     validate: ['georgianLetters', 'minLength'],
@@ -8,11 +11,11 @@ const validationDirections = {
     options: { minLength: 2, key: 'მომხმარებლის გვარი' },
   },
   email: {
-    validate: ['notEmpty', 'englishLetters', 'endsWith'],
-    options: { endsWith: '@redberry.ge', key: 'მომხმარებლის ემაილი' },
+    validate: ['notEmpty', 'englishLetters', 'isEmail'],
+    options: { key: 'მომხმარებლის ემაილი' },
   },
   phoneNumber: {
-    validate: ['notEmpty', 'onlyNumbers', 'isGeorgianPhoneNumber'],
+    validate: ['notEmpty', 'isGeorgianPhoneNumber'],
     options: { key: 'მომხმარებლის ტელეფონის ნომერი' },
   },
   teamId: {
@@ -48,7 +51,7 @@ const validationDirections = {
     options: { key: 'ლეპტოპის RAM (GB)' },
   },
   laptopHardDriveType: {
-    validate: ['notEmpty', 'englishLetters'],
+    validate: ['notEmpty', 'englishLetters', 'enum'],
     options: { key: 'მეხსიერების ტიპი', enum: ['SSD', 'HDD'] },
   },
   laptopPrice: {
@@ -56,8 +59,8 @@ const validationDirections = {
     options: { key: 'ლეპტოპის ფასი' },
   },
   laptopState: {
-    validate: ['notEmpty'],
-    options: { key: 'ლეპტოპის მდგომარეობა', enum: ['ახალი', 'მეორადი'] },
+    validate: ['notEmpty', 'enum'],
+    options: { key: 'ლეპტოპის მდგომარეობა', enum: ['new', 'used'] },
   },
 };
 

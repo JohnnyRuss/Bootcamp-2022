@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from './inputField.module.scss';
+import styles from './styles/inputField.module.scss';
 
 function InputField({
   type = 'text',
@@ -22,10 +22,7 @@ function InputField({
       <label htmlFor={id} className={styles.inpLabel}>
         {label}
       </label>
-      <div
-        className={`${styles.inpWrapper} 
-        
-        `}>
+      <div className={`${styles.inpWrapper}`}>
         <input
           type={type}
           id={id}
