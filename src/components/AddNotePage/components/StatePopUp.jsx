@@ -1,23 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { useScrollRestriction } from '../../../hooks';
+
 import styles from './styles/statePopUp.module.scss';
 
-function StatePopUp({ loading, error }) {
-  const [closePopUp, setClosePopUp] = useState(true);
+function StatePopUp({ error, loading }) {
+  const [activePopUp, setActivePopUp] = useState(true);
+  useScrollRestriction(activePopUp);
+
+  useEffect(() => {
+    if (!activePopUp && loading) setActivePopUp(true);
+  }, [loading, activePopUp]);
 
   return (
-    (loading || error) &&
-    closePopUp && (
-      <div className={styles.statePopUp} onClick={() => setClosePopUp(false)}>
-        {loading ? (
-          'loading...'
-        ) : error ? (
-          <>
-            <img src='/assets/error-icon.svg' alt='error icon' />
-            ბოდიშს გიხდით ტექნიკური შეფერხებისთვის, გთხოვთ სცადოთ მოგვიანებით{' '}
-          </>
-        ) : (
-          ''
-        )}
+    activePopUp && (
+      <div className={styles.stateBackdrop} onClick={() => !loading && setActivePopUp(false)}>
+        <div className={styles.statePopUp}>
+          {loading ? (
+            'loading...'
+          ) : error ? (
+            <>
+              <img src='/assets/error-icon.svg' alt='error icon' />
+              ბოდიშს გიხდით ტექნიკური შეფერხებისთვის, გთხოვთ სცადოთ მოგვიანებით{' '}
+            </>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     )
   );

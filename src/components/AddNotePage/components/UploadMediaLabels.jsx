@@ -4,7 +4,7 @@ function UploadMediaLabels({ file, setFile, fileRef, newFile, valid }) {
   return (
     (!file || newFile || valid.error) && (
       <>
-        {!newFile && (
+        {(!newFile || valid.error) && (
           <>
             <label
               htmlFor='file'
