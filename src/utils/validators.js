@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+import validator from 'validator';
 /**
  * object of validator functions
  */
@@ -31,6 +32,11 @@ const validators = {
     } catch (error) {
       throw error;
     }
+  },
+
+  includesEmptySpace: function (options) {
+    if (options.target.includes(' '))
+      throw new Error(`${options.key} არ შეძლება შეიცავდეს ცარიელ სივრცეებს`);
   },
 
   georgianLetters: function (options) {
@@ -94,15 +100,12 @@ const validators = {
 
   isEmail: function (options) {
     try {
-      if (!options.target.endsWith('@redberry.ge'))
-        throw new Error(`${options.key} უნდა მთავრდებოდეს ${options.endsWith}_ით`);
+      if (!validator.isEmail(options.target)) throw new Error(`${options.key} არ არის ვალიდური`);
+      else if (!options.target.endsWith('@redberry.ge'))
+        throw new Error(`${options.key} უნდა მთავრდებოდეს @redberry.ge_ით`);
       else if (
         this.regFor({ target: options.target, key: options.key, reg: 'notExtraSymbolsForEmail' })
       )
-        throw new Error('ემაილი არ არის ვალიდური');
-      else if (options.target.slice(0, options.target.length - 12).includes('@'))
-        throw new Error('ემაილი არ არის ვალიდური');
-      else if (options.target.slice(0, options.target.length - 12).length < 3)
         throw new Error('ემაილი არ არის ვალიდური');
     } catch (error) {
       throw error;
@@ -141,7 +144,8 @@ const validators = {
 
   notEmpty: function (options) {
     try {
-      if (options.target?.length <= 0) throw new Error(`${options.key} - ველი სავალდებულოა`);
+      const targ = `${options.target}`;
+      if (targ.trim().length < 1) throw new Error(`${options.key} - ველი სავალდებულოა`);
     } catch (error) {
       throw error;
     }
