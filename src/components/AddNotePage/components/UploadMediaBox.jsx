@@ -4,14 +4,7 @@ import styles from './styles/uploadMediaBox.module.scss';
 import UploadMediaDetails from './UploadMediaDetails';
 import UploadMediaLabels from './UploadMediaLabels';
 
-function UploadMediaBox({
-  file,
-  setFile,
-  dragOver,
-  setDragOver,
-  fileRef,
-  valid,
-}) {
+function UploadMediaBox({ file, setFile, dragOver, setDragOver, fileRef, valid }) {
   const [newFile, setNewFile] = useState(false);
   return (
     <>
@@ -53,7 +46,7 @@ function UploadMediaBox({
           </>
         )}
       </div>
-      <UploadMediaDetails file={file} setNewFile={setNewFile} />
+      {file && !valid.error && <UploadMediaDetails file={file} setNewFile={setNewFile} />}
     </>
   );
 }

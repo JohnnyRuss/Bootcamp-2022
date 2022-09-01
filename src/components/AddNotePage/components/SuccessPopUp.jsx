@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useScrollRestriction } from '../../../hooks';
 
 import styles from './styles/successPopUp.module.scss';
 import { PrimaryButton } from '../../Layouts';
 
 function SuccessPopUp() {
-  useEffect(() => {
-    const body = document.querySelector('body');
-    body.style.overflow = 'hidden';
-
-    return () => (body.style.overflow = 'scroll');
-  }, []);
+  useScrollRestriction(true);
 
   return (
     <div className={styles.popUp}>

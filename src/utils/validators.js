@@ -12,7 +12,7 @@ const validators = {
       onlyEnglishAndNumbers: /[a-zA-Z0-9]/g,
       onlyNumbers: /[0-9]/g,
       notExtraSymbols: /[!@#\$%\^\&*\)\({}["'`+=~>?|<:;.,_-]/g,
-      notExtraSymbolsForEmail: /[!#\$%\^\&*\)\({}["'`+=~>|?<:;,_-]/g,
+      notExtraSymbolsForEmail: /[!#\$%\^\&*\)\({}["'`+=~>|?<:;,]/g,
       notExtraSymbolsForPhone: /[@!#\$%\^\&*\)\({}["'`=~>|?<:;.,_-]/g,
     };
     const regEx = new RegExp(reg[regExx]);
@@ -99,12 +99,25 @@ const validators = {
   },
 
   isEmail: function (options) {
+    const enabledExtras = ['.', '-', '_'];
+    const emailPrefix = options.target.split('@')[0];
+
     try {
       if (!validator.isEmail(options.target)) throw new Error(`${options.key} არ არის ვალიდური`);
       else if (!options.target.endsWith('@redberry.ge'))
         throw new Error(`${options.key} უნდა მთავრდებოდეს @redberry.ge_ით`);
       else if (
         this.regFor({ target: options.target, key: options.key, reg: 'notExtraSymbolsForEmail' })
+      )
+        throw new Error('ემაილი არ არის ვალიდური');
+      else if (
+        enabledExtras.some((extra) => emailPrefix.endsWith(extra) || emailPrefix.startsWith(extra))
+      )
+        throw new Error('ემაილი არ არის ვალიდური');
+      else if (
+        [...emailPrefix].some(
+          (char, i, str) => enabledExtras.includes(char) && enabledExtras.includes(str[i + 1])
+        )
       )
         throw new Error('ემაილი არ არის ვალიდური');
     } catch (error) {
@@ -161,6 +174,13 @@ const validators = {
           })
           .join(' ')}`
       );
+  },
+
+  isImage: function (options) {
+    if (options.file?.type?.split('/')?.[0] !== 'image' || !options.file?.size)
+      throw new Error('ლეპტოპის სურათი - ველი სავალდებულოა და უნდა შეიცავდეს მხოლოდ ფოტოს');
+    else if (options.file.size / 1024 >= 900)
+      throw new Error('ლეპტოპის სურათი - ფაილის ზომა არ უნდა აღემატებოდეს 900KB_ს');
   },
 };
 

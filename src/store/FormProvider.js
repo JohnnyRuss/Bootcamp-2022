@@ -7,6 +7,7 @@ import {
   setDataToLocale,
 } from '../utils/getLocalData';
 import { formReducer, formState } from './formReducer';
+import validators from '../utils/validators';
 
 export const FormContext = createContext({
   handleType: (type) => {},
@@ -130,14 +131,17 @@ function FormProvider({ children }) {
   // vlidated image
   useEffect(() => {
     function isImg() {
-      if (imgFile?.type?.split('/')?.[0] !== 'image' || !imgFile?.size)
+      try {
+        validators.isImage({ file: imgFile });
+        dispatchForm({ type: 'SET_FILE_ERROR', message: '', error: false, valid: true });
+      } catch (error) {
         dispatchForm({
           type: 'SET_FILE_ERROR',
-          message: 'ლეპტოპის სურათი - ველი სავალდებულოა და უნდა შეიცავდეს მხოლოდ ფოტოს',
+          message: error.message,
           error: true,
           valid: false,
         });
-      else dispatchForm({ type: 'SET_FILE_ERROR', message: '', error: false, valid: true });
+      }
     }
 
     if (file.didMount) isImg();

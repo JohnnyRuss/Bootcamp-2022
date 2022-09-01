@@ -120,7 +120,7 @@ function AddPC() {
   return (
     <>
       <form className={styles.addPcForm}>
-        <StatePopUp loading={loading} error={error} />
+        {(loading || error) && <StatePopUp loading={loading} error={error} />}
         <UploadMediaBox
           file={file.file}
           dragOver={file.dragOver}
@@ -253,13 +253,16 @@ function AddPC() {
           userValue={pcData.laptopState}
         />
         <div className={styles.btnBox}>
-          <PrimaryButton className={`${styles.btn} ${styles.btnBack}`} onClick={handleRouteBack}>
+          <PrimaryButton
+            className={`${styles.btn} ${styles.btnBack}`}
+            onClick={handleRouteBack}
+            disabled={loading}>
             უკან
           </PrimaryButton>
           <PrimaryButton
             onClick={handleSubmit}
             className={` ${styles.btn} ${styles.btnNext}`}
-            disabled={!validCollaborator || !validPcInfo}>
+            disabled={!validCollaborator || !validPcInfo || loading}>
             დამახსოვრება
           </PrimaryButton>
         </div>
