@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './goBackBTN.module.scss';
 
-function GoBackBTN() {
+function GoBackBTN({ path }) {
   const navigate = useNavigate();
 
   function handleNavigateBack() {
-    navigate(-1);
+    navigate(path || -1);
   }
 
   return (

@@ -5,6 +5,10 @@
   background: color('grey-dark-light-4');
   position: relative;
 
+  @include respond(tab-portrate) {
+    padding: 0;
+  }
+
   .addNoteContainer {
     max-width: 122.6rem;
     margin: 0 auto;
@@ -14,5 +18,9 @@
     margin-top: 6.7rem;
     @include flexBox;
     @include flexProperty(center, center);
+
+    @include respond(tab-portrate) {
+      display: none;
+    }
   }
 }

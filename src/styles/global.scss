@@ -76,6 +76,6 @@ html body ul {
 html body a::selection,
 html body input::selection,
 html body textarea::selection {
-  background: color('blueColor');
-  color: color('whiteColor');
+  background: color('blue-primary-color');
+  color: color('white-color');
 }

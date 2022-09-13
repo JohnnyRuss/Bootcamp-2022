@@ -1,18 +1,21 @@
+/**
+ * describes each form-data field, what kind of validation requests field must to pass
+ */
 const validationDirections = {
   name: {
-    validate: ['georgianLetters', 'minLength'],
+    validate: ['georgianLetters', 'minLength', 'includesEmptySpace'],
     options: { minLength: 2, key: 'მომხმარებლის სახელი' },
   },
   surname: {
-    validate: ['georgianLetters', 'minLength'],
+    validate: ['georgianLetters', 'minLength', 'includesEmptySpace'],
     options: { minLength: 2, key: 'მომხმარებლის გვარი' },
   },
   email: {
-    validate: ['notEmpty', 'englishLetters', 'endsWith'],
-    options: { endsWith: '@redberry.ge', key: 'მომხმარებლის ემაილი' },
+    validate: ['notEmpty', 'isEmail', 'englishLetters'],
+    options: { key: 'მომხმარებლის ემაილი' },
   },
   phoneNumber: {
-    validate: ['notEmpty', 'onlyNumbers', 'isGeorgianPhoneNumber'],
+    validate: ['notEmpty', 'isGeorgianPhoneNumber', 'includesEmptySpace'],
     options: { key: 'მომხმარებლის ტელეფონის ნომერი' },
   },
   teamId: {
@@ -36,28 +39,28 @@ const validationDirections = {
     options: { key: 'CPU' },
   },
   laptopCpuCores: {
-    validate: ['notEmpty', 'onlyNumbers', 'greaterZero'],
+    validate: ['notEmpty', 'onlyNumbers', 'greaterZero', 'includesEmptySpace'],
     options: { key: 'CPU_ს ბირთვი' },
   },
   laptopCpuThreads: {
-    validate: ['notEmpty', 'onlyNumbers', 'greaterZero'],
+    validate: ['notEmpty', 'onlyNumbers', 'greaterZero', 'includesEmptySpace'],
     options: { key: 'CPU_ს ნაკადი' },
   },
   laptopRam: {
-    validate: ['notEmpty', 'onlyNumbers', 'greaterZero'],
+    validate: ['notEmpty', 'onlyNumbers', 'greaterZero', 'includesEmptySpace'],
     options: { key: 'ლეპტოპის RAM (GB)' },
   },
   laptopHardDriveType: {
-    validate: ['notEmpty', 'englishLetters'],
+    validate: ['notEmpty', 'englishLetters', 'enum'],
     options: { key: 'მეხსიერების ტიპი', enum: ['SSD', 'HDD'] },
   },
   laptopPrice: {
-    validate: ['notEmpty', 'onlyNumbers', 'greaterZero'],
+    validate: ['notEmpty', 'onlyNumbers', 'greaterZero', 'includesEmptySpace'],
     options: { key: 'ლეპტოპის ფასი' },
   },
   laptopState: {
-    validate: ['notEmpty', 'georgianLetters'],
-    options: { key: 'ლეპტოპის მდგომარეობა', enum: ['ახალი', 'მეორადი'] },
+    validate: ['notEmpty', 'enum'],
+    options: { key: 'ლეპტოპის მდგომარეობა', enum: ['new', 'used'] },
   },
 };
 

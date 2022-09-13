@@ -1,4 +1,4 @@
-@use '../../../styles/helpers/helpers' as *;
+@use '../../../../styles/helpers/helpers' as *;
 
 .checkBoxField {
   transform: translateX(2.5rem);
@@ -29,6 +29,13 @@
       width: 1.4rem;
       height: 1.4rem;
       border-radius: 100%;
+
+      @include respond(phone-small) {
+        left: -2.12rem;
+        top: 0.2rem;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
     }
   }
 

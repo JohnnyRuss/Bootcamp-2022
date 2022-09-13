@@ -1,0 +1,31 @@
+@use '../../../../styles/helpers/helpers' as *;
+
+.selectFieldList {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 2.4rem;
+  right: 2.4rem;
+  margin-top: -0.5rem;
+  @include flexBox(column);
+  max-height: 22rem;
+  overflow: auto;
+  border-radius: $radius-small;
+  background: color('white-color');
+  @include boxShadowBlack(0, 0.5rem, 0.2);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &Item {
+    padding: 1rem;
+    cursor: pointer;
+    font-size: size('bigSize');
+    transition: background-color 0.2s;
+  }
+
+  &Item:hover {
+    background-color: color('blue-tint-color');
+  }
+}

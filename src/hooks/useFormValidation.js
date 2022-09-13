@@ -38,6 +38,16 @@ function errorReducer(state, action) {
   }
 }
 
+function proccessValidation(key, value) {
+  try {
+    validationDirections[key].validate.map((requirement) =>
+      validators[requirement]({ ...validationDirections[key].options, target: value })
+    );
+  } catch (error) {
+    throw error;
+  }
+}
+
 function useFormValidation(key, value) {
   const [didMount, setDidMount] = useState(false);
   const [{ active, firstTouch, error }, dispatch] = useReducer(errorReducer, initialState);
@@ -90,13 +100,3 @@ function useFormValidation(key, value) {
 }
 
 export default useFormValidation;
-
-function proccessValidation(key, value) {
-  try {
-    validationDirections[key].validate.map((requirement) =>
-      validators[requirement]({ ...validationDirections[key].options, target: value })
-    );
-  } catch (error) {
-    throw error;
-  }
-}

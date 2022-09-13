@@ -3,7 +3,7 @@
 
 @mixin scrollBar($element, $width: 1rem, $radius: 2rem, $blockStart: 0rem, $blockEnd: 0rem) {
   #{$element} {
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -13,16 +13,16 @@
   }
 
   #{$element}::-webkit-scrollbar-thumb {
-    background: color(blackColor);
+    background: color(dark-grey-color);
     border-radius: $radius;
   }
 
   #{$element}::-webkit-scrollbar-thumb:hover {
-    background: color(darkGreyColor);
+    background: color(black-color);
   }
 
   #{$element}::-webkit-scrollbar-track {
-    background: color(whiteShadeColor);
+    background: color(grey-dark-light-3);
     border-radius: $radius;
     margin-block-start: $blockStart;
     margin-block-end: $blockEnd;
